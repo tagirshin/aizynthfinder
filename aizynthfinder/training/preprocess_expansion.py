@@ -48,6 +48,7 @@ def _filter_dataset(config: Config) -> pd.DataFrame:
     template_group = template_group.size().sort_values(ascending=False)
     min_index = template_group[template_group >= config["template_occurrence"]].index
     dataset = full_data[full_data[template_hash_col].isin(min_index)]
+    dataset[template_hash_col] = dataset[template_hash_col].astype(str)
 
     template_labels = LabelEncoder()
     dataset = dataset.assign(
